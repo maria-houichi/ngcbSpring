@@ -44,6 +44,7 @@ public class utilisateur extends employe implements Serializable{
 		this.e_mail = e_mail;
         this.role = role;
         this.etat=etat;
+        
 //        this.actif = actif;
 	}
 

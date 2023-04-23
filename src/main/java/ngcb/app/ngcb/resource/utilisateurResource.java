@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,31 +27,59 @@ public class utilisateurResource {
 		List<utilisateur> utilisateurs =UtilisateurService.findAllUtilisateurs();
 		return new ResponseEntity<>(utilisateurs, HttpStatus.OK);
 	}
-
-	@GetMapping("/find/{nom}")
-	public ResponseEntity<utilisateur> getutilisateurBy(@PathVariable("nom")String nom){
-		utilisateur utilisateur =UtilisateurService.findUtilisateurByNom(nom);
-		return new ResponseEntity<>(utilisateur,HttpStatus.OK );
-	}
-
+//
+//	@GetMapping("/find/{nom}")
+//	public ResponseEntity<utilisateur> getutilisateurBy(@PathVariable("nom")String nom){
+//		utilisateur utilisateur =UtilisateurService.findUtilisateurByNom(nom);
+//		return new ResponseEntity<>(utilisateur,HttpStatus.OK );
+//	}
+//
 	@PostMapping("/add")
 	public ResponseEntity<utilisateur> addUtilisateur(@RequestBody utilisateur utilisateur){
-		utilisateur newUtilisateur= UtilisateurService.addUtilisateur(utilisateur);
+		utilisateur newUtilisateur= UtilisateurService.createUser(utilisateur);
 		return new ResponseEntity<>(newUtilisateur, HttpStatus.CREATED);
 		
 	}
+//	
+//
+//	@PutMapping("/update")
+//	public ResponseEntity<utilisateur> updateUtilisateur(@RequestBody utilisateur utilisateur){
+//		utilisateur updateUtilisateur= UtilisateurService.addUtilisateur(utilisateur);
+//		return new ResponseEntity<>(updateUtilisateur, HttpStatus.OK);
+//		
+//	}
 
-	@PutMapping("/update")
-	public ResponseEntity<utilisateur> updateUtilisateur(@RequestBody utilisateur utilisateur){
-		utilisateur updateUtilisateur= UtilisateurService.addUtilisateur(utilisateur);
-		return new ResponseEntity<>(updateUtilisateur, HttpStatus.OK);
-		
-	}
-
-	@DeleteMapping("/désactivé/{nom}")
-	public ResponseEntity<?> désactivéUtilisateur(@PathVariable ("nom")String nom){
-		UtilisateurService.désactivéUtilisateur(nom);
+	@PutMapping("/desactiver/{nom}")
+	public ResponseEntity<?> desactiverCompte(@PathVariable ("nom")utilisateur utilisateur){
+		UtilisateurService.desactiverCompte(utilisateur );
 		return new ResponseEntity<>( HttpStatus.OK);	
 	}
 
-}
+
+   
+
+    
+    @GetMapping("/{nom}")
+    public utilisateur getUserByEmail(@PathVariable String nom) {
+        return UtilisateurService.findUtilisateurByNom(nom);
+    }
+    
+    @PutMapping("/update")
+    public utilisateur updateUser(@RequestBody utilisateur utilisateur) {
+        return UtilisateurService.updateUser(utilisateur);
+        
+    }
+    
+    @PutMapping("/{nom}/disable")
+    public ResponseEntity<?> disableUser(@PathVariable String nom) {
+    	utilisateur utilisateur = UtilisateurService.findUtilisateurByNom(nom);
+        UtilisateurService.disableUser(utilisateur);
+        return new ResponseEntity<>( HttpStatus.OK);	
+    }
+    
+    @PutMapping("/{nom}/enable")
+    public void enableUser(@PathVariable String nom) {
+    	utilisateur utilisateur = UtilisateurService.findUtilisateurByNom(nom);
+    	UtilisateurService.enableUser(utilisateur);
+    	}}
+

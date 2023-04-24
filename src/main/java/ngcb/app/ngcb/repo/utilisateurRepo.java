@@ -14,8 +14,11 @@ public interface utilisateurRepo extends JpaRepository<utilisateur,String> {
 //      User findByEmail(String email);
 //		void desactiverCompteByNom(String nom);
 //		activerCompteByNom(String nom);
-		Optional <utilisateur> findUtilisateurByNom(String nom);
+		//Optional <utilisateur> findUtilisateurByNom(String nom);
 		List<utilisateur> findAll();
+	 	List<utilisateur> findAllByActifTrue();
+	 	List<utilisateur> findAllByActifFalse();
+	 	
 
 		   
 		

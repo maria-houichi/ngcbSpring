@@ -1,1 +1,0 @@
-package ngcb.app.ngcb.resource;

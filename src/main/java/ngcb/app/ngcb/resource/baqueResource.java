@@ -31,8 +31,8 @@ public class baqueResource {
 	
 	@PostMapping("/add")
 	public ResponseEntity<banque> addBanque(@RequestBody banque banque){
-		banque newEmploye= BanqueService.addBanque(banque);
-		return new ResponseEntity<>(newEmploye, HttpStatus.CREATED);
+		banque newBanque= BanqueService.addBanque(banque);
+		return new ResponseEntity<>(newBanque, HttpStatus.CREATED);
 		
 	}
 }

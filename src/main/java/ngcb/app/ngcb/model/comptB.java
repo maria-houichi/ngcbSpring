@@ -10,40 +10,46 @@ package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn ;
+import jakarta.persistence.ManyToMany;
+
 @Entity
-/**
- * @author Sos
- *
-*/
+ 
+
+
  public class comptB implements Serializable {
 	   /**
 	 *
 	 */
+
+
 @Autowired
 
 private static final long serialVersionUID = 1L;
+@ManyToMany
+@JoinTable(
+  name = "delegation", 
+  joinColumns = @JoinColumn(name = "rib"), 
+  inverseJoinColumns = @JoinColumn(name = "matricule"))
+Set<signataire> delegations;
 @Id
-@GeneratedValue (strategy = GenerationType.AUTO)
-
-	   Long rib ;
-	   String intitule ;
-	   nature nature ;
+       Long rib ;
+       nature nature ;
 	   type type ;
-	   etat etat;
 	   LocalDate date_ouv;
 	   LocalDate date_clo ;
+	   private etat etat;
 	   public comptB () {}
-	   comptB (Long rib ,String intitule ,nature nature ,type type, etat etat ,LocalDate date_ouv  ,LocalDate date_clo)
+	   comptB (Long rib ,nature nature ,type type, etat etat ,LocalDate date_ouv  ,LocalDate date_clo)
 	    {
 	        this.rib = rib;
-	        this.intitule = intitule;
 	        this.nature = nature;
 	        this.type = type;
 	        this.etat = etat;
@@ -57,14 +63,6 @@ private static final long serialVersionUID = 1L;
 	    public void  setRib(Long rib){
 	        this.rib = rib;
 	    }
-
-	    public String  getIntitule() {
-	    return intitule;
-	}
-
-		public  void setIntitule (String intitule) {
-	    this.intitule = intitule ;
-	}
 
 	public nature getNature()  {
 	    return nature;
@@ -107,8 +105,12 @@ private static final long serialVersionUID = 1L;
 	}
 @Override
 		public String toString() {
-			return "compte bancaire{"+"rib:"+rib+", intitulé :"+intitule+"nature:"+nature+"etat:"+etat+"type:"+type+ "date ouverture:"+date_ouv+"date_clo"+date_clo+"}";
+			return "compte bancaire{"+"rib:"+rib+"nature:"+nature+"etat:"+etat+"type:"+type+ "date ouverture:"+date_ouv+"date_clo"+date_clo+"}";
 		}
+ public List<comptB> getSignataires() {
+	
+	return null;
+}
 
 
 }

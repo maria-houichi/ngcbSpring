@@ -24,7 +24,13 @@ private final compteBRepo CompteBRepo;
 	public comptB addCompteB (comptB comptB) {
 		return CompteBRepo.save(comptB);} 
 	
+	  public void ajouterSignataire(comptB comptB) {
 
+//		  comptB.getSignataires().add(signataire);
+	       CompteBRepo.save(comptB);
+	   }
+
+	
 
 
 }

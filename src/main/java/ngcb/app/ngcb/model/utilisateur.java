@@ -1,6 +1,6 @@
 package ngcb.app.ngcb.model;
 
-/*package ngcb.app.ngcb;
+
 
 import java.io.Serializable;
 
@@ -56,4 +56,3 @@ public class utilisateur extends employe implements Serializable{
 		}
 
 }
-*/

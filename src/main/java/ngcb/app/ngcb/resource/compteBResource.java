@@ -31,10 +31,18 @@ public class compteBResource {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<comptB> addEmploye(@RequestBody comptB comptB){
+	public ResponseEntity<comptB> addCompteB(@RequestBody comptB comptB){
 		comptB newComptB= CompteBService.addCompteB(comptB);
 		return new ResponseEntity<>(newComptB, HttpStatus.CREATED);
 		
 	}
+	
+	@PostMapping("/addSig")
+	public ResponseEntity<?> add_sigB( @RequestBody  comptB compteB){
+		CompteBService.ajouterSignataire(compteB);
+		return new ResponseEntity<>( HttpStatus.CREATED);
+		
+	}
+
 
 }

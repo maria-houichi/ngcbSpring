@@ -10,15 +10,19 @@ package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn ;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
  
@@ -36,10 +40,28 @@ private static final long serialVersionUID = 1L;
 @ManyToMany
 @JoinTable(
   name = "delegation", 
-  joinColumns = @JoinColumn(name = "rib"), 
+  joinColumns = @JoinColumn(name = "id"), 
   inverseJoinColumns = @JoinColumn(name = "matricule"))
-Set<signataire> delegations;
+@JsonIgnoreProperties("signataires")
+Set<signataire> signataires;
 @Id
+@GeneratedValue
+ 	   Long id ;
+
+@ManyToOne
+@JoinColumn(name="codeBanque", nullable=false)
+@JsonIgnoreProperties("comptesB")
+private banque banque;
+
+@ManyToOne
+@JoinColumn(name="codeStr", nullable=false)
+@JsonIgnoreProperties("comptesB")
+private structure structure;
+
+@ManyToOne
+@JoinColumn(name="codeAgence", nullable=false )
+@JsonIgnoreProperties("comptesB")
+private agence agence;
        Long rib ;
        nature nature ;
 	   type type ;
@@ -47,8 +69,8 @@ Set<signataire> delegations;
 	   LocalDate date_clo ;
 	   private etat etat;
 	   public comptB () {}
-	   comptB (Long rib ,nature nature ,type type, etat etat ,LocalDate date_ouv  ,LocalDate date_clo)
-	    {
+	   comptB (Long id, Long rib ,nature nature ,type type, etat etat ,LocalDate date_ouv  ,LocalDate date_clo)
+	    { this.id=id;
 	        this.rib = rib;
 	        this.nature = nature;
 	        this.type = type;
@@ -56,7 +78,18 @@ Set<signataire> delegations;
 	        this.date_ouv = date_ouv;
 	        this.date_clo = date_clo;
 	    }
-	   public Long getRib() {
+	
+	public void setSignataires(Set<signataire> signataires) {
+		this.signataires = signataires;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getRib() {
 	        return rib;
 	    }
 
@@ -100,17 +133,38 @@ Set<signataire> delegations;
 	    return date_clo;
 	}
 
-		public void setdate_clo (LocalDate date_clo){
-	    this.date_clo = date_clo;
+	public void setDate_clo(LocalDate date_clo) {
+		this.date_clo = date_clo;
 	}
+		
+		 public Set<signataire> getSignataires() {
+		        return signataires;
+		    }
+		 
+		 public banque getBanque() {
+				return banque;
+			}
+			public void setBanque(banque banque) {
+				this.banque = banque;
+			}
+			public structure getStructure() {
+				return structure;
+			}
+			public void setStructure(structure structure) {
+				this.structure = structure;
+			}
+			public agence getAgence() {
+				return agence;
+			}
+			public void setAgence(agence agence) {
+				this.agence = agence;
+			}
 @Override
 		public String toString() {
 			return "compte bancaire{"+"rib:"+rib+"nature:"+nature+"etat:"+etat+"type:"+type+ "date ouverture:"+date_ouv+"date_clo"+date_clo+"}";
 		}
- public List<comptB> getSignataires() {
-	
-	return null;
-}
+
+
 
 
 }

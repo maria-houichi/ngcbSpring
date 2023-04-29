@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import ngcb.app.ngcb.employeNotFoundException;
 import ngcb.app.ngcb.model.agence;
+import ngcb.app.ngcb.model.banque;
 import ngcb.app.ngcb.repo.agenceRepo;
 
 
@@ -23,5 +25,10 @@ public class agenceService {
 	public agence addAgence (agence agence) {
 		
 		return AgenceRepo.save(agence);} 
+	
+	public agence findAgenceByCodeAgence(Long codeAgence ) {
+		return AgenceRepo.findAgenceByCodeAgence(codeAgence)
+				.orElseThrow(()-> new employeNotFoundException("agence by id "+codeAgence+"was not found "));
+	}
 
 }

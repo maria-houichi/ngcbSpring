@@ -28,5 +28,7 @@ public CorsFilter corsFilter () {
 	UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 	urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 	return new CorsFilter(urlBasedCorsConfigurationSource);
+	
+	//Commentaireeeeeeeeeeeee
 }
 }

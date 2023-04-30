@@ -1,46 +1,48 @@
 package ngcb.app.ngcb.model;
-
-
-
 import java.io.Serializable;
-
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name="utilisateur")
 public class utilisateur extends employe implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	 private String e_mail;
-	    private String mdp;
+	    private String e_mail;
+	    private String password;
 	    private role role;
-
+	    Boolean actif;
+	
 	public utilisateur() {}
-	 utilisateur (String matricule, String nom,String  prenom, String fonction,genre genre,String e_mail,String mdp,role role)
+	utilisateur (String matricule, String nom,String  prenom, String fonction,String e_mail ,String password,role role,genre genre, Boolean actif ){
+		super(matricule,nom,prenom,fonction,genre);
+		this.role=role;
+        this.actif = actif;
+        this.e_mail = e_mail;
+        this.password=password;
+        
+	}
 
-	    {   super(matricule, nom, prenom , fonction , genre);
-	        this.e_mail = e_mail;
-	        this.mdp = mdp;
-	        this.role = role;
-	    }
+
 
 		public String getE_mail() {
-	    return this.e_mail ;
+		return e_mail;
 	}
-
-		public void  setE_mail(String e_mail){
-	    this.e_mail = e_mail;
+	public void setE_mail(String e_mail) {
+		this.e_mail = e_mail;
 	}
-
-		public String getMdp()  {
-	    return mdp;
+	public String getPassword() {
+		return password;
 	}
-
-		public void setMdp(String mdp) {
-	    this.mdp= mdp;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
+	public Boolean getActif() {
+		return actif;
+	}
+	public void setActif(Boolean actif) {
+		this.actif = actif;
+	}
 		public role getRole(){
 	    return role;
 	}
@@ -52,7 +54,8 @@ public class utilisateur extends employe implements Serializable{
 
 		public String toString() {
 			super.toString();
-			return "utilisateur{"+ "e_mail:"+e_mail+"mot de passe :"+mdp+"role:"+role+"}";
+			return "utilisateur{"+ "e_mail:"+e_mail+"mot de passe :"+password+"role:"+role+"}";
 		}
+
 
 }

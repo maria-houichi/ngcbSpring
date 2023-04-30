@@ -1,19 +1,17 @@
 package ngcb.app.ngcb.repo;
-/**
- * 
- */
-
-
-
-
-import java.util.Optional;
-
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import ngcb.app.ngcb.model.employe;
 import ngcb.app.ngcb.model.utilisateur;
 
-
 public interface utilisateurRepo extends JpaRepository<utilisateur,String> {
-	Optional <utilisateur> findUtilisateurByMatricule(String matricule);
-}
+//      User findByEmail(String email);
+//		void desactiverCompteByNom(String nom);
+//		activerCompteByNom(String nom);
+		//Optional <utilisateur> findUtilisateurByNom(String nom);
+		List<utilisateur> findAll();
+	 	List<utilisateur> findAllByActifTrue();
+	 	List<utilisateur> findAllByActifFalse();
+		
+
+		}
+

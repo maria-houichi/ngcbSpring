@@ -23,13 +23,13 @@ public class banque implements Serializable {
 	private static final long serialVersionUID = 1L;
 	 @Id
 	  Long codeBanque ;
-	 @OneToMany(mappedBy="banque")
+ @OneToMany(mappedBy="banque")
 	  @JsonIgnoreProperties("banque")
 	 private Set<agence> agences;  
 	  
-	  @OneToMany(mappedBy="banque")
+	  /*@OneToMany(mappedBy="banque")
 	  @JsonIgnoreProperties("banque")
-	    private Set<comptB> comptesB;
+	    private Set<comptB> comptesB;*/
 	  String lib_banque;
 	  String  e_mailB;
 	  public banque() {}
@@ -51,18 +51,18 @@ public class banque implements Serializable {
 		    return lib_banque;
 		}
 
-			public Set<agence> getAgences() {
+		public Set<agence> getAgences() {
 				return agences;
 			}
 			public void setAgences(Set<agence> agences) {
 				this.agences = agences;
-			}
+			}/*	
 			public Set<comptB> getComptesB() {
 				return comptesB;
 			}
 			public void setComptesB(Set<comptB> comptesB) {
 				this.comptesB = comptesB;
-			}
+			}*/
 			public void setLib_banque(String lib_banque){
 		    this.lib_banque = lib_banque;
 		}

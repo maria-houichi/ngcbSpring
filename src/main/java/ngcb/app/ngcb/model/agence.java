@@ -10,6 +10,8 @@ package ngcb.app.ngcb.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.hibernate.annotations.Cache;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -19,6 +21,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
+
 public class agence implements Serializable{
 	   /**
 	 *
@@ -27,7 +30,6 @@ public class agence implements Serializable{
 @Id
 
 	   Long codeAgence;
-
 @OneToMany(mappedBy="agence")
 @JsonIgnoreProperties("agence")
 private Set<comptB> comptesB;
@@ -72,8 +74,8 @@ private banque banque;
 		}
 
 			
-			
-			public Set<comptB> getComptesB() {
+	
+		public Set<comptB> getComptesB() {
 				return comptesB;
 			}
 			public void setComptesB(Set<comptB> comptesB) {

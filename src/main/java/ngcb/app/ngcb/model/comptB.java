@@ -42,19 +42,13 @@ private static final long serialVersionUID = 1L;
   name = "delegation", 
   joinColumns = @JoinColumn(name = "id"), 
   inverseJoinColumns = @JoinColumn(name = "matricule"))
-@JsonIgnoreProperties("signataires")
 Set<signataire> signataires;
 @Id
 @GeneratedValue
  	   Long id ;
 
 @ManyToOne
-@JoinColumn(name="codeBanque", nullable=false)
-@JsonIgnoreProperties("comptesB")
-private banque banque;
-
-@ManyToOne
-@JoinColumn(name="codeStr", nullable=false)
+@JoinColumn(name="codeStr", nullable=false )
 @JsonIgnoreProperties("comptesB")
 private structure structure;
 
@@ -141,19 +135,14 @@ private agence agence;
 		        return signataires;
 		    }
 		 
-		 public banque getBanque() {
-				return banque;
-			}
-			public void setBanque(banque banque) {
-				this.banque = banque;
-			}
-			public structure getStructure() {
+	
+	public structure getStructure() {
 				return structure;
 			}
 			public void setStructure(structure structure) {
 				this.structure = structure;
 			}
-			public agence getAgence() {
+		public agence getAgence() {
 				return agence;
 			}
 			public void setAgence(agence agence) {

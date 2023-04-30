@@ -10,22 +10,27 @@ package ngcb.app.ngcb.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.hibernate.annotations.Cache;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 @Entity
+
 public class structure implements Serializable {
     /**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
 	Long codeStr;
-	 @OneToMany(mappedBy="structure")
-	  private Set<comptB> comptesB;
+	@OneToMany(mappedBy="structure")
+	@JsonIgnoreProperties("structure")
+	private Set<comptB> comptesB;
     Long str_parent ;
     String lib_str;
     String type_str;
@@ -69,13 +74,12 @@ public class structure implements Serializable {
     	public void setType_str(String type_str) {
         this.type_str = type_str;
     }
-    	
-    	  public Set<comptB> getComptesB() {
+    /*	public Set<comptB> getComptesB() {
     			return comptesB;
     		}
     		public void setComptesB(Set<comptB> comptesB) {
     			this.comptesB = comptesB;
-    		}
+    		}*/
 @Override
     	public String toString() {
     		return "structure{"+"code structure :"+codeStr+",structure parent :"+str_parent+"lib structure"+lib_str+"type structure"+type_str+ "}";

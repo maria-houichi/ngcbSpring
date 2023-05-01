@@ -8,39 +8,61 @@ package ngcb.app.ngcb.model;
  *
  */
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 @Entity
 public class banque implements Serializable {
 	  /**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-
-	Long code_banque ;
+	 @Id
+	  Long codeBanque ;
+ @OneToMany(mappedBy="banque")
+	  @JsonIgnoreProperties("banque")
+	 private Set<agence> agences;  
+	  
+	  /*@OneToMany(mappedBy="banque")
+	  @JsonIgnoreProperties("banque")
+	    private Set<comptB> comptesB;*/
 	  String lib_banque;
 	  String  e_mailB;
 	  public banque() {}
-	  banque(Long code_banque, String lib_banque,String e_mailB )
+	  banque(Long codeBanque, String lib_banque,String e_mailB )
 	    {
-	        this.code_banque = code_banque;
+	        this.codeBanque = codeBanque;
 	        this.lib_banque = lib_banque;
 	        this.e_mailB = e_mailB;
 	    }
-	        public Long getCode_banque() {
-		    return code_banque;
+	        public Long getcodeBanque() {
+		    return codeBanque;
 		}
 
-			public void setCode_banque(Long code_banque){
-		    this.code_banque = code_banque;
+			public void setcodeBanque(Long codeBanque){
+		    this.codeBanque = codeBanque;
 		}
 
 			public String getLib_banque(){
 		    return lib_banque;
 		}
 
+		public Set<agence> getAgences() {
+				return agences;
+			}
+			public void setAgences(Set<agence> agences) {
+				this.agences = agences;
+			}/*	
+			public Set<comptB> getComptesB() {
+				return comptesB;
+			}
+			public void setComptesB(Set<comptB> comptesB) {
+				this.comptesB = comptesB;
+			}*/
 			public void setLib_banque(String lib_banque){
 		    this.lib_banque = lib_banque;
 		}
@@ -54,7 +76,7 @@ public class banque implements Serializable {
 		}
 @Override
 			public String toString() {
-				return "banque{"+"code banque:"+code_banque+",lib banque :"+lib_banque+"e_mail banque:"+e_mailB+ "}";
+				return "banque{"+"code banque:"+codeBanque+",lib banque :"+lib_banque+"e_mail banque:"+e_mailB+ "}";
 			}
 
 }

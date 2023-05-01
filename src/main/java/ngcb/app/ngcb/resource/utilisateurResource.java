@@ -66,10 +66,6 @@ public class utilisateurResource {
 	  utilisateur 	updateUtilisateur =UtilisateurService.désactivéUser(utilisateur );
 		return new ResponseEntity<>(updateUtilisateur, HttpStatus.OK);	
 	}}
-
-
-   
-
 //    
 //    @GetMapping("/{nom}")
 //    public utilisateur getUserByEmail(@PathVariable String nom) {

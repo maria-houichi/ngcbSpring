@@ -8,39 +8,48 @@ package ngcb.app.ngcb.model;
  *
  */
 import java.io.Serializable;
+import java.util.Set;
+
+import org.hibernate.annotations.Cache;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 @Entity
+
 public class structure implements Serializable {
     /**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-
-	Long code_str;
+	Long codeStr;
+	@OneToMany(mappedBy="structure")
+	@JsonIgnoreProperties("structure")
+	private Set<comptB> comptesB;
     Long str_parent ;
     String lib_str;
     String type_str;
     public structure () {}
-    structure (Long code_str,Long str_parent,String lib_str,String type_str)
+    structure (Long codeStr,Long str_parent,String lib_str,String type_str)
     {
-        this.code_str = code_str;
+        this.codeStr = codeStr;
         this.str_parent = str_parent;
         this.lib_str = lib_str;
         this.type_str = type_str;
     }
-    public Long getCode_str(){
-        return code_str;
+    public Long getcodeStr(){
+        return codeStr;
     }
+    
+    public void setcodeStr(Long codeStr) {
+		this.codeStr = codeStr;
+	}
 
-    	public void  setTCode_str(Long code_str) {
-       this.code_str=code_str ;
-    }
 
     	public Long getStr_parent(){
         return str_parent;
@@ -58,16 +67,22 @@ public class structure implements Serializable {
         this.lib_str = lib_str;
     }
 
-    	public String getype_str() {
-        return type_str ;
-    }
+    	public String getType_str() {
+    		return type_str;
+    	}
 
     	public void setType_str(String type_str) {
         this.type_str = type_str;
     }
+    /*	public Set<comptB> getComptesB() {
+    			return comptesB;
+    		}
+    		public void setComptesB(Set<comptB> comptesB) {
+    			this.comptesB = comptesB;
+    		}*/
 @Override
     	public String toString() {
-    		return "structure{"+"code structure :"+code_str+",structure parent :"+str_parent+"lib structure"+lib_str+"type structure"+type_str+ "}";
+    		return "structure{"+"code structure :"+codeStr+",structure parent :"+str_parent+"lib structure"+lib_str+"type structure"+type_str+ "}";
     	}
 
 }

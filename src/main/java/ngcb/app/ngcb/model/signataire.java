@@ -1,8 +1,11 @@
 package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="signataire")
@@ -10,20 +13,15 @@ import jakarta.persistence.Table;
 
 
 public class signataire  extends employe implements Serializable{
-	
+
+
 	private static final long serialVersionUID = 1L;
 	Boolean actif ;
 public signataire() {}
 	signataire (String matricule, String nom,String  prenom, String fonction,genre genre, Boolean actif ){
 		super(matricule, nom, prenom , fonction , genre);
 		 this.actif = actif;
-	}/*	
-	@Override
-
-	public String toString() {
-	return super.toString();
-		}
-*/
+	}
 	
 	public Boolean getActif() {
 	    return this.actif ;

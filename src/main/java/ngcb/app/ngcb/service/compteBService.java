@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import ngcb.app.ngcb.employeNotFoundException;
 import ngcb.app.ngcb.model.comptB;
+import ngcb.app.ngcb.model.employe;
 import ngcb.app.ngcb.model.signataire;
 import ngcb.app.ngcb.repo.compteBRepo;
 
@@ -24,11 +26,11 @@ private final compteBRepo CompteBRepo;
 	public comptB addCompteB (comptB comptB) {
 		return CompteBRepo.save(comptB);} 
 	
-	  public void ajouterSignataire(comptB comptB) {
 
-//		  comptB.getSignataires().add(signataire);
-	       CompteBRepo.save(comptB);
-	   }
+	  public comptB findeCompteBById(Long id ) {
+			return  CompteBRepo.findComptBById(id)
+					.orElseThrow(()-> new employeNotFoundException("compte by id "+id+"was not found "));
+		}
 
 	
 

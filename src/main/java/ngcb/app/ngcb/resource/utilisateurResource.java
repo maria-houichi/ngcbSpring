@@ -29,6 +29,7 @@ public class utilisateurResource {
 		List<utilisateur> utilisateurs =UtilisateurService.findAllUtilisateursT();
 		return new ResponseEntity<>(utilisateurs, HttpStatus.OK);
 	}
+
 	@GetMapping("/all/inactif")
 	public ResponseEntity<List<utilisateur>> getAllUtilisateurs(){
 		List<utilisateur> utilisateurs =UtilisateurService.findAllUtilisateursF();

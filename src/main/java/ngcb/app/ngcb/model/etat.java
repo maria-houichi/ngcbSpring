@@ -11,6 +11,6 @@ public enum etat {
 	actif,
 	inactif,
 	cloturé,
-	enCoursCloture,
-	enCoursOuverture;
+	enCoursdeCloture,
+	enCoursdOuverture;
 }

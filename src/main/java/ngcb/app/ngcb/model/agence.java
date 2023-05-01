@@ -1,12 +1,6 @@
-/**
- * 
- */
 package ngcb.app.ngcb.model;
 
-/**
- * @author Sos
- *
- */
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -23,9 +17,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 
 public class agence implements Serializable{
-	   /**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 @Id
 

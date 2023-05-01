@@ -1,11 +1,7 @@
 package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
-import java.util.Set;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="signataire")

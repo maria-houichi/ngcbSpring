@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import ngcb.app.ngcb.model.signataire;
+import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.signataireRepo;
 @Service
 @Transactional
@@ -32,10 +33,7 @@ public class signataireService {
 		return SignataireRepo.findAllByActifTrue();
 		 }
 
-/*	public signataire  updateSignataire(signataire signataire ) {
-		return SignataireRepo.save(signataire );
-		}
-		*/
+
 	public signataire  updateSignataire(signataire signataire) {
 		return SignataireRepo.save(signataire );
 }
@@ -43,9 +41,13 @@ public class signataireService {
 		signataire.setActif(false);
 		return SignataireRepo.save(signataire );
 }
-
-/*	public void deleteSignataire (String matricule) {
-	SignataireRepo.deleteSignataireByMatricule(matricule);
+public  List<signataire> findAllsignatairesdeleted(){
+		
+	return SignataireRepo.findAllByActifFalse();
 }
-*/
+	 public List<String> getFonctions() {
+	        return SignataireRepo.getFonctions();
+	    }
+
+
 }

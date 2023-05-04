@@ -49,13 +49,7 @@ public class utilisateurResource {
 		return new ResponseEntity<>(updateUtilisateur, HttpStatus.OK);
 		
 	}
-	
-//	@GetMapping("/find/{nom}")
-//	public ResponseEntity<utilisateur> getutilisateurBy(@PathVariable("nom")String nom){
-//		utilisateur utilisateur =UtilisateurService.findUtilisateurByNom(nom);
-//		return new ResponseEntity<>(utilisateur,HttpStatus.OK );
-//	}
-//
+
 	@PutMapping("/activer")
 	public ResponseEntity<utilisateur> activerCompte(@RequestBody utilisateur utilisateur){
 	  utilisateur 	updateUtilisateur =UtilisateurService.activéUser(utilisateur );
@@ -66,28 +60,5 @@ public class utilisateurResource {
 	  utilisateur 	updateUtilisateur =UtilisateurService.désactivéUser(utilisateur );
 		return new ResponseEntity<>(updateUtilisateur, HttpStatus.OK);	
 	}}
-//    
-//    @GetMapping("/{nom}")
-//    public utilisateur getUserByEmail(@PathVariable String nom) {
-//        return UtilisateurService.findUtilisateurByNom(nom);
-//    }
-    
-//    @PutMapping("/update")
-//    public utilisateur updateUser(@RequestBody utilisateur utilisateur) {
-//        return UtilisateurService.updateUser(utilisateur);
-//        
-//    }}
-    
-//    @PutMapping("/{nom}/disable")
-//    public ResponseEntity<?> disableUser(@PathVariable String nom) {
-//    	utilisateur utilisateur = UtilisateurService.findUtilisateurByNom(nom);
-//        UtilisateurService.disableUser(utilisateur);
-//        return new ResponseEntity<>( HttpStatus.OK);	
-//    }
-//    
-//    @PutMapping("/{nom}/enable")
-//    public void enableUser(@PathVariable String nom) {
-//    	utilisateur utilisateur = UtilisateurService.findUtilisateurByNom(nom);
-//    	UtilisateurService.enableUser(utilisateur);
-//    	}}
+
 

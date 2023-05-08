@@ -21,27 +21,31 @@ import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+
 @EnableMethodSecurity
 public class SecurityConfig {
+	 private final jwtFilter jwtFilter;
+	  private final AuthenticationProvider authenticationProvider;
+		public SecurityConfig(jwtFilter jwtFilter,AuthenticationProvider authenticationProvider) {
+			this.jwtFilter=jwtFilter;
+			this.authenticationProvider=authenticationProvider;
+		}
 
-private final  jwtFilter jwtFilter;
-private AuthenticationProvider AuthenticationProvider;
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeHttpRequests()
+            .requestMatchers(
+                "/**"
+            ).permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-public SecurityFilterChain securityFilterCain(HttpSecurity http)throws Exception {
-	http 
-	 .csrf()
-     .disable()
-     .authorizeHttpRequests()
-     .requestMatchers("/**").permitAll()
-      .anyRequest()
-      .authenticated()
-      .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-      .and()
-      .authenticationProvider(AuthenticationProvider)
-      .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-	 return http.build();
-}}
+        return http.build();
+    }
+}

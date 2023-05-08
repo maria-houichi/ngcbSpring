@@ -53,17 +53,7 @@ public class utilisateurService  {
 	    	
 	    	return UtilisateurRepo.save(utilisateur);
 	    }
-//	    
-//	    public void activéUser(utilisateur utilisateur) {
-//	    	utilisateur.setEnabled(true);
-//	    	UtilisateurRepo.save(utilisateur);
-//	    }
-	
-//		public void desactiverCompte(utilisateur utilisateur) {
-//			utilisateur.setEnabled(false);
-//	    	UtilisateurRepo.save(utilisateur);
-//			
-//		}
+
 	}
 
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,13 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import ngcb.app.ngcb.model.structure;
 import ngcb.app.ngcb.service.structureService;
 @RestController
-@RequestMapping("/api")
+
+
+
+@RequestMapping("/structure")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class structureResource {
 
 	@Autowired 
 	structureService structureService;
 	
-	@GetMapping("structure/all")
+	@GetMapping("/all")
 	public List<structure> findAllProd() {
 //		List<structure> str= structureService.findAllStr();
 //		for(structure s :str) {
@@ -33,13 +39,13 @@ public class structureResource {
 		return structureService.findAllStr();
 	}
 
-	@GetMapping("structure/children/{codeD}")
+	@GetMapping("/children/{codeD}")
 	public List<String> findStrChildren(@PathVariable String codeD) {
 		codeD = "%"+codeD+"%";
 		return structureService.findStrChildren(codeD);
 	}
 	
-	@GetMapping("structure/childrenStructures/{codeD}")
+	@GetMapping("/childrenStructures/{codeD}")
 	public List<structure> findChildrenStructures(@PathVariable String codeD) {
 		codeD = "%"+codeD+"%";
 		return structureService.findChildrenStructures(codeD);
@@ -57,27 +63,27 @@ public class structureResource {
 		}
 	}
 	
-	@GetMapping("/structure/{idStr}")
+	@GetMapping("/{idStr}")
 	public structure findById(@PathVariable int idStr) {
 		structure str= structureService.findById(idStr);
 		str=getStr(str);
 		return str;
 	}
 	
-	@GetMapping("/structure/codeStr/{code}")
+	@GetMapping("/codeStr/{code}")
 	public structure findStrByCode(@PathVariable String code) {
 		structure str= structureService.findStrByCode(code);
 		str=getStr(str);
 		return str;
 	}
-	@PostMapping("/structure/add")
+	@PostMapping("/add")
 	public ResponseEntity<structure> addStructure(@RequestBody structure structure){
 		structure newStructure= structureService.Add(structure);
 		return new ResponseEntity<>(newStructure, HttpStatus.CREATED);
 		
 	}
 	
-	@PutMapping("/structure/codesStr")
+	@PutMapping("/codesStr")
 	public List<structure> findStrByCodes(@RequestBody List<String> codes) {
 		return structureService.findStrByCodes(codes);
 	}

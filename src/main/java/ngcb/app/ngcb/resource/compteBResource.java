@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ngcb.app.ngcb.model.comptB;
+import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.service.compteBService;
 
 
@@ -36,6 +38,12 @@ public class compteBResource {
 	public ResponseEntity<comptB> addCompteB(@RequestBody comptB comptB){
 		comptB newComptB= CompteBService.addCompteB(comptB);
 		return new ResponseEntity<>(newComptB, HttpStatus.CREATED);
+		
+	}
+	@PutMapping("/update")
+	public ResponseEntity<comptB> updateUtilisateur(@RequestBody comptB comptB){
+		comptB updateComptB= CompteBService.updateCompteB(comptB);
+		return new ResponseEntity<>(updateComptB, HttpStatus.OK);
 		
 	}
 	

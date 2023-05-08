@@ -9,6 +9,7 @@ import ngcb.app.ngcb.employeNotFoundException;
 import ngcb.app.ngcb.model.comptB;
 import ngcb.app.ngcb.model.employe;
 import ngcb.app.ngcb.model.signataire;
+import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.compteBRepo;
 
 @Service
@@ -30,7 +31,11 @@ private final compteBRepo CompteBRepo;
 	  public comptB findeCompteBById(Long id ) {
 			return  CompteBRepo.findComptBById(id)
 					.orElseThrow(()-> new employeNotFoundException("compte by id "+id+"was not found "));
-		}
+		} 
+	  
+	  public comptB updateCompteB (comptB comptB) {
+			return CompteBRepo.save(comptB);} 
+	    
 
 	
 

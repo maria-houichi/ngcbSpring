@@ -30,5 +30,10 @@ public class agenceService {
 		return AgenceRepo.findAgenceByCodeAgence(codeAgence)
 				.orElseThrow(()-> new employeNotFoundException("agence by id "+codeAgence+"was not found "));
 	}
+	public List<agence> findAgenceByCodeBanque(banque banque ) {
+		return AgenceRepo.findAgenceByBanque(banque);
+			
+	}
+	
 
 }

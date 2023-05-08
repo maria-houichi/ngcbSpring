@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ngcb.app.ngcb.model.agence;
+import ngcb.app.ngcb.model.banque;
 import ngcb.app.ngcb.model.employe;
 import ngcb.app.ngcb.service.agenceService;
 
@@ -44,5 +45,13 @@ public class agenceResource {
 		agence agence =AgenceService.findAgenceByCodeAgence(codeAgence);
 		return new ResponseEntity<>(agence,HttpStatus.OK );
 	}
+	@GetMapping("/find/by/{codeBanque}")
+	
+	public ResponseEntity<List<agence>> getAllAgencesByCodeBanque(@PathVariable("codeBanque")banque banque){
+		List<agence> agences = (List<agence>) AgenceService.findAgenceByCodeBanque(banque);
+		return new ResponseEntity<>(agences, HttpStatus.OK);
+	}
+
+	
 
 }

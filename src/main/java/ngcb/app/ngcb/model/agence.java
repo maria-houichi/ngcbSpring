@@ -30,12 +30,14 @@ private Set<comptB> comptesB;
 @JoinColumn(name="codeBanque", nullable=false)
 @JsonIgnoreProperties("agences")
 private banque banque;
+       
 	   String  lib_agence;
 	   String  adrs ;
 	   String e_mail_a;
 	   public agence () {}
 	   agence(Long codeAgence,String lib_agence,String adrs,String e_mail_a)
 	    {
+		   
 	        this.codeAgence = codeAgence;
 	        this.lib_agence = lib_agence;
 	        this.adrs = adrs;

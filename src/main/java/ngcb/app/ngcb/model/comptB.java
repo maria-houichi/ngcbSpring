@@ -25,14 +25,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
- 
 
 
  public class comptB implements Serializable {
-	   /**
-	 *
-	 */
-
 
 @Autowired
 
@@ -59,18 +54,29 @@ private agence agence;
        Long rib ;
        nature nature ;
 	   type type ;
+	   LocalDate date_dem;
 	   LocalDate date_ouv;
-	   LocalDate date_clo ;
+	   public LocalDate getDate_dem() {
+		return date_dem;
+	}
+	public void setDate_dem(LocalDate date_dem) {
+		this.date_dem = date_dem;
+	}
+	LocalDate date_clo ;
+	   
+	   
 	   private etat etat;
 	   public comptB () {}
-	   comptB (Long id, Long rib ,nature nature ,type type, etat etat ,LocalDate date_ouv  ,LocalDate date_clo)
+	   comptB (Long id, Long rib ,nature nature ,type type, etat etat ,LocalDate date_dem,LocalDate date_ouv  ,LocalDate date_clo)
 	    { this.id=id;
 	        this.rib = rib;
 	        this.nature = nature;
 	        this.type = type;
 	        this.etat = etat;
+	        this.date_dem=date_dem;
 	        this.date_ouv = date_ouv;
 	        this.date_clo = date_clo;
+	        
 	    }
 	
 	public void setSignataires(Set<signataire> signataires) {

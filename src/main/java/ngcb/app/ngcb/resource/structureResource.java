@@ -2,37 +2,109 @@ package ngcb.app.ngcb.resource;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import ngcb.app.ngcb.model.agence;
 import ngcb.app.ngcb.model.structure;
 import ngcb.app.ngcb.service.structureService;
-
 @RestController
-@RequestMapping("/structure")
+@RequestMapping("/api")
 public class structureResource {
+
+	@Autowired 
+	structureService structureService;
 	
-	private final structureService StructureService;
-	
-	public structureResource(structureService StructureService) {
-		this.StructureService = StructureService;
+	@GetMapping("structure/all")
+	public List<structure> findAllProd() {
+//		List<structure> str= structureService.findAllStr();
+//		for(structure s :str) {
+//			if(s.getParentStr()!=0) {
+//			s = getStr(s);
+//			}
+//		}
+//		return str;
+		return structureService.findAllStr();
+	}
+
+	@GetMapping("structure/children/{codeD}")
+	public List<String> findStrChildren(@PathVariable String codeD) {
+		codeD = "%"+codeD+"%";
+		return structureService.findStrChildren(codeD);
 	}
 	
-	@GetMapping("/all")
-	public ResponseEntity<List<structure>> getAllStructures(){
-		List<structure> structures = StructureService.findAllStructures();
-		return new ResponseEntity<>(structures, HttpStatus.OK);
+	@GetMapping("structure/childrenStructures/{codeD}")
+	public List<structure> findChildrenStructures(@PathVariable String codeD) {
+		codeD = "%"+codeD+"%";
+		return structureService.findChildrenStructures(codeD);
+	}
+
+	public structure getStr(structure str) {
+		if(str.getParentStr()==25) {
+			//System.out.println("if "+str.getParentStr());
+			return str;			
+		}else {
+			//System.out.println("else"+str.getParentStr());
+			 structure prtStr= structureService.findById(str.getParentStr());
+			 str.setParent_STR(getStr(prtStr));
+			 return str;
+		}
 	}
 	
-	@GetMapping("/find/{codeStr}")
-	public ResponseEntity<structure> getStructureBy(@PathVariable("codeStr")Long codeStr){
-		structure structure =StructureService.findStructureByCodeStr(codeStr);
-		return new ResponseEntity<>(structure,HttpStatus.OK );
+	@GetMapping("/structure/{idStr}")
+	public structure findById(@PathVariable int idStr) {
+		structure str= structureService.findById(idStr);
+		str=getStr(str);
+		return str;
+	}
+	
+	@GetMapping("/structure/codeStr/{code}")
+	public structure findStrByCode(@PathVariable String code) {
+		structure str= structureService.findStrByCode(code);
+		str=getStr(str);
+		return str;
+	}
+	@PostMapping("/structure/add")
+	public ResponseEntity<structure> addStructure(@RequestBody structure structure){
+		structure newStructure= structureService.Add(structure);
+		return new ResponseEntity<>(newStructure, HttpStatus.CREATED);
+		
+	}
+	
+	@PutMapping("/structure/codesStr")
+	public List<structure> findStrByCodes(@RequestBody List<String> codes) {
+		return structureService.findStrByCodes(codes);
 	}
 
 }
+
+
+//@RestController
+//@RequestMapping("/structure")
+//public class structureResource {
+//	
+//	private final structureService StructureService;
+//	
+//	public structureResource(structureService StructureService) {
+//		this.StructureService = StructureService;
+//	}
+//	
+//	@GetMapping("/all")
+//	public ResponseEntity<List<structure>> getAllStructures(){
+//		List<structure> structures = StructureService.findAllStructures();
+//		return new ResponseEntity<>(structures, HttpStatus.OK);
+//	}
+//	
+//	@GetMapping("/find/{codeStr}")
+//	public ResponseEntity<structure> getStructureBy(@PathVariable("codeStr")Long codeStr){
+//		structure structure =StructureService.findStructureByCodeStr(codeStr);
+//		return new ResponseEntity<>(structure,HttpStatus.OK );
+//	}
+//
+//}

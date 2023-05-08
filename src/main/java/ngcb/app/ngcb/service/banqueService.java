@@ -15,7 +15,7 @@ import ngcb.app.ngcb.repo.banqueRepo;
 @Transactional
 public class banqueService {
 	
-private final banqueRepo BanqueRepo;
+private static banqueRepo BanqueRepo;
 	
 	public banqueService(banqueRepo BanqueRepo) {
 		this.BanqueRepo=BanqueRepo;
@@ -28,7 +28,7 @@ private final banqueRepo BanqueRepo;
 		
 		return BanqueRepo.save(banque);} 
 	
-	public banque findBanqueByCodeBanque(Long codeBanque ) {
+	public static banque findBanqueByCodeBanque(Long codeBanque ) {
 		return BanqueRepo.findBanqueByCodeBanque(codeBanque)
 				.orElseThrow(()-> new employeNotFoundException("banque by id "+codeBanque+"was not found "));
 	}

@@ -10,12 +10,16 @@ package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,6 +27,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn ;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 
@@ -32,12 +37,17 @@ import jakarta.persistence.ManyToOne;
 @Autowired
 
 private static final long serialVersionUID = 1L;
-@ManyToMany
+/*@ManyToMany
 @JoinTable(
   name = "delegation", 
   joinColumns = @JoinColumn(name = "id"), 
   inverseJoinColumns = @JoinColumn(name = "matricule"))
 Set<signataire> signataires;
+*/
+
+@OneToMany(cascade = CascadeType.ALL, mappedBy = "comptB")
+@JsonManagedReference
+private List<delegation> delegations;
 @Id
 @GeneratedValue
  	   Long id ;
@@ -54,20 +64,20 @@ private agence agence;
        Long rib ;
        nature nature ;
 	   type type ;
-	   LocalDate date_dem;
-	   LocalDate date_ouv;
-	   public LocalDate getDate_dem() {
+	   Date date_dem;
+	   Date date_ouv;
+	   public Date getDate_dem() {
 		return date_dem;
 	}
-	public void setDate_dem(LocalDate date_dem) {
+	public void setDate_dem(Date date_dem) {
 		this.date_dem = date_dem;
 	}
-	LocalDate date_clo ;
+	Date date_clo ;
 	   
 	   
 	   private etat etat;
 	   public comptB () {}
-	   comptB (Long id, Long rib ,nature nature ,type type, etat etat ,LocalDate date_dem,LocalDate date_ouv  ,LocalDate date_clo)
+	   comptB (Long id, Long rib ,nature nature ,type type, etat etat ,Date date_dem,Date date_ouv  ,Date date_clo)
 	    { this.id=id;
 	        this.rib = rib;
 	        this.nature = nature;
@@ -78,11 +88,11 @@ private agence agence;
 	        this.date_clo = date_clo;
 	        
 	    }
-	
+/*	
 	public void setSignataires(Set<signataire> signataires) {
 		this.signataires = signataires;
 	}
-	
+	*/
 	public Long getId() {
 		return id;
 	}
@@ -121,25 +131,25 @@ private agence agence;
 	    this.etat= etat ;
 	}
 
-	public LocalDate getDate_ouv()  {
+	public Date getDate_ouv()  {
 	    return date_ouv;
 	}
 
-		public  void setDate_ouv(LocalDate date_ouv){
+		public  void setDate_ouv(Date date_ouv){
 	    this.date_ouv = date_ouv;
 	}
 
-	public LocalDate getDate_clo(){
+	public Date getDate_clo(){
 	    return date_clo;
 	}
 
-	public void setDate_clo(LocalDate date_clo) {
+	public void setDate_clo(Date date_clo) {
 		this.date_clo = date_clo;
 	}
-		
+	/*	
 		 public Set<signataire> getSignataires() {
 		        return signataires;
-		    }
+		    }*/
 		 
 	
 	public structure getStructure() {

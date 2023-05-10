@@ -1,7 +1,7 @@
 package ngcb.app.ngcb.config;
 import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -26,9 +26,12 @@ import static org.springframework.http.HttpMethod.PUT;
 public class SecurityConfig {
 	 private final jwtFilter jwtFilter;
 	  private final AuthenticationProvider authenticationProvider;
-		public SecurityConfig(jwtFilter jwtFilter,AuthenticationProvider authenticationProvider) {
+	  private final LogoutHandler logoutHandler;
+		public SecurityConfig(jwtFilter jwtFilter,AuthenticationProvider authenticationProvider,LogoutHandler logoutHandler) {
 			this.jwtFilter=jwtFilter;
 			this.authenticationProvider=authenticationProvider;
+			this.logoutHandler=logoutHandler;
+			
 		}
 
     @Bean
@@ -44,8 +47,11 @@ public class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        .logout()
+        .logoutUrl("/api/v1/auth/logout")
+        .addLogoutHandler(logoutHandler)
+        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
         return http.build();
     }
 }

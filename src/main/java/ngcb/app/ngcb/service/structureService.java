@@ -2,6 +2,8 @@ package ngcb.app.ngcb.service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
@@ -32,10 +34,10 @@ public class structureService implements interfaceStructure{
 		return structureRepository.findChildrenStructures(codeD);
 	}
 	
-//	@Override
-//	public structure findById(int idStr) {
-//		return structureRepository.findById(idStr);
-//	}
+	@Override
+	public structure findById(int idStr) {
+		return structureRepository.getById(idStr);
+	}
 	
 	@Override
 	public structure findStrByCode(String code){
@@ -46,16 +48,6 @@ public class structureService implements interfaceStructure{
 	public List<structure> findStrByCodes(List<String> codes){
 		return structureRepository.findStrByCodes(codes);
 	}
-
-	@Override
-	public structure findById(int idStr) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	 public structure Add(structure structure) {
-		 structure.setActif(true);
-	        return structureRepository.save(structure);
-	    }
 
 
 }

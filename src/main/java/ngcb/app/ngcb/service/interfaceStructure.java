@@ -1,11 +1,11 @@
 package ngcb.app.ngcb.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import ngcb.app.ngcb.model.structure;
 
 public interface interfaceStructure {
-
 	public List<structure> findAllStr();
 
 	public List<String> findStrChildren(String codeD);

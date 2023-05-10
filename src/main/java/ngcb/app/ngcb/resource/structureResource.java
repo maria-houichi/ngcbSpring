@@ -76,12 +76,7 @@ public class structureResource {
 		str=getStr(str);
 		return str;
 	}
-	@PostMapping("/add")
-	public ResponseEntity<structure> addStructure(@RequestBody structure structure){
-		structure newStructure= structureService.Add(structure);
-		return new ResponseEntity<>(newStructure, HttpStatus.CREATED);
-		
-	}
+	
 	
 	@PutMapping("/codesStr")
 	public List<structure> findStrByCodes(@RequestBody List<String> codes) {

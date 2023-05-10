@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +30,8 @@ public class utilisateur  implements UserDetails{
 	    private String password;
 	    private role role;
 	    Boolean actif;
-	    
+//	    @OneToMany(mappedBy = "utilisateur")
+//	    private List<token> tokens;
 	    
 	    public utilisateur () {}
 	    public utilisateur ( String matricule  ,String  nom , String  prenom, String fonction  ,genre genre,String userName,String password, role role, Boolean actif )
@@ -43,6 +45,7 @@ public class utilisateur  implements UserDetails{
 	        this.password=password;
 	        this.role = role;
 	        this.actif = actif;
+	       // this.tokens = tokens;
 	    }
 	    
 
@@ -79,6 +82,16 @@ public class utilisateur  implements UserDetails{
 	    		public void setGenre(genre genre){
 	    		    this.genre = genre;
 	    		}
+	    		
+	    		
+	    		
+//	    		  public  List<token>getTokens()  {
+//	    		        return tokens ;
+//	    		    }
+//
+//	    		    	public  void setTokens( List<token> tokens) {
+//	    		        this.tokens = tokens;
+//	    		    }
 
 		public String getuserName() {
 		return userName;

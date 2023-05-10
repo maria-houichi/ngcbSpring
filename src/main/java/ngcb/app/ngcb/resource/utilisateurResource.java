@@ -38,7 +38,7 @@ public class utilisateurResource {
 		return new ResponseEntity<>(utilisateurs, HttpStatus.OK);
 	}
 
-	@PostMapping("/utilisateur/add")
+	@PostMapping("/add")
 	public ResponseEntity<utilisateur> addUtilisateur(@RequestBody utilisateur utilisateur){
 		utilisateur newUtilisateur= UtilisateurService.createUser(utilisateur);
 		return new ResponseEntity<>(newUtilisateur, HttpStatus.CREATED);

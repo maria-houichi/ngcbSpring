@@ -2,8 +2,12 @@
 package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
 import jakarta.persistence.NamedQueries;
 import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Transient;
 import jakarta.persistence.Basic;
@@ -11,6 +15,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "STRUCTURE")
@@ -26,7 +31,12 @@ import jakarta.persistence.Table;
 public class structure implements Serializable {
 
     private static final long serialVersionUID = 1L;
-   
+    @OneToMany(mappedBy="structure")
+    @JsonIgnoreProperties("structure")
+    private Set<comptB> comptesB;
+    @OneToMany(mappedBy="structure")
+    @JsonIgnoreProperties("structure")
+    private Set<signataire> signataires;
     @Id
     @Basic(optional = false)
     @Column(name = "CODESTR")

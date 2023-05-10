@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ngcb.app.ngcb.model.comptB;
+import ngcb.app.ngcb.model.structure;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.service.compteBService;
 
@@ -48,6 +49,13 @@ public class compteBResource {
 		return new ResponseEntity<>(updateComptB, HttpStatus.OK);
 		
 	}
+	@GetMapping("/compteby/{codeStr}")
+	public ResponseEntity<List<comptB>> getCmptbyStr(@PathVariable("codeStr") int codeStr) {
+	    List<comptB> comptes = CompteBService.findeCompteBByStr(codeStr);
+	    return new ResponseEntity<>(comptes, HttpStatus.OK);
+	}
+
+
 	
 	@GetMapping("/get/{id}")
 	public ResponseEntity<comptB> getCmpt(@PathVariable ("id")Long id){

@@ -2,8 +2,12 @@
 package ngcb.app.ngcb.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
 import jakarta.persistence.NamedQueries;
 import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Transient;
 import jakarta.persistence.Basic;
@@ -11,9 +15,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "STRUCTURE")
+
 @NamedQueries({
     @NamedQuery(name = "structure.findAllStr", query = "SELECT s FROM structure s WHERE s.actif = true"),
     @NamedQuery(name = "structure.findStrChildren", query = "SELECT s.code FROM structure s WHERE s.compoCode like :codeD and s.actif = true "),
@@ -24,20 +30,23 @@ import jakarta.persistence.Table;
 @Proxy(lazy = false)
 
 public class structure implements Serializable {
+	
 
     private static final long serialVersionUID = 1L;
    
     @Id
+    
     @Basic(optional = false)
     @Column(name = "CODESTR")
 	private int codeStr;
+    @OneToMany(mappedBy="structure")
+    @JsonIgnoreProperties("structure")
+    private Set<comptB> comptesB;
     @Column(name = "CDG")
 	private String cdg;
     @Column (name = "CLEPARENT")
- 	private int parentStr;
-   
+ 	private int parentStr;   
     @Column(name = "LIBELLE")
-
    	private String libStr;
     @Column(name = "TYPE")
    	private String type;
@@ -111,6 +120,7 @@ public class structure implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
 
 	public String getCompoCode() {
 		return compoCode;

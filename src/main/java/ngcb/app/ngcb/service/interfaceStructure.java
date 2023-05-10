@@ -12,7 +12,7 @@ public interface interfaceStructure {
 	
 	public List<structure> findChildrenStructures(String codeD);
 
-	public structure findById(int idStr);
+	public structure findById(int codeStr);
 	
 	public structure findStrByCode(String code);
 

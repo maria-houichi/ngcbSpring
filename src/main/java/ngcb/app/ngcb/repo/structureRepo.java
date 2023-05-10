@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ngcb.app.ngcb.model.structure;
 
-public interface structureRepo extends JpaRepository<structure,Long >  {
+public interface structureRepo extends JpaRepository<structure,Integer >  {
 public List<structure> findAllStr();
 public structure findStrByCodeStr(int codeStr);
 	
@@ -17,5 +17,5 @@ public structure findStrByCodeStr(int codeStr);
 
 	public List<structure> findStrByCodes(List<String> codes);
 
-//	public structure findById(int codeStr);
+	public structure findById(int codeStr);
 	}

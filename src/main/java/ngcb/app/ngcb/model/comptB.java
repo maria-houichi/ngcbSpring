@@ -45,7 +45,7 @@ Set<signataire> signataires;
 @ManyToOne
 @JoinColumn(name="codeStr", nullable=false )
 @JsonIgnoreProperties("comptesB")
-private structure structure;
+public structure structure;
 
 @ManyToOne
 @JoinColumn(name="codeAgence", nullable=false )

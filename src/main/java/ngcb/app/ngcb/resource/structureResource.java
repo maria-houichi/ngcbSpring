@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import ngcb.app.ngcb.model.comptB;
 import ngcb.app.ngcb.model.structure;
 import ngcb.app.ngcb.service.structureService;
 @RestController
@@ -39,6 +41,8 @@ public class structureResource {
 		return structureService.findAllStr();
 	}
 
+	
+
 	@GetMapping("/children/{codeD}")
 	public List<String> findStrChildren(@PathVariable String codeD) {
 		codeD = "%"+codeD+"%";
@@ -63,9 +67,9 @@ public class structureResource {
 		}
 	}
 	
-	@GetMapping("/{idStr}")
-	public structure findById(@PathVariable int idStr) {
-		structure str= structureService.findById(idStr);
+	@GetMapping("/{codeStr}")
+	public structure findById(@PathVariable int codeStr) {
+		structure str= structureService.findById(codeStr);
 		str=getStr(str);
 		return str;
 	}
@@ -91,26 +95,3 @@ public class structureResource {
 }
 
 
-//@RestController
-//@RequestMapping("/structure")
-//public class structureResource {
-//	
-//	private final structureService StructureService;
-//	
-//	public structureResource(structureService StructureService) {
-//		this.StructureService = StructureService;
-//	}
-//	
-//	@GetMapping("/all")
-//	public ResponseEntity<List<structure>> getAllStructures(){
-//		List<structure> structures = StructureService.findAllStructures();
-//		return new ResponseEntity<>(structures, HttpStatus.OK);
-//	}
-//	
-//	@GetMapping("/find/{codeStr}")
-//	public ResponseEntity<structure> getStructureBy(@PathVariable("codeStr")Long codeStr){
-//		structure structure =StructureService.findStructureByCodeStr(codeStr);
-//		return new ResponseEntity<>(structure,HttpStatus.OK );
-//	}
-//
-//}

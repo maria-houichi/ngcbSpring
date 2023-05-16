@@ -1,8 +1,12 @@
 package ngcb.app.ngcb.service;
 
 import java.util.List;
+import java.util.Optional;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
+import ngcb.app.ngcb.model.role;
+import ngcb.app.ngcb.model.signataire;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.utilisateurRepo;
 @Service
@@ -14,6 +18,11 @@ public class utilisateurService  {
 	public utilisateurService(utilisateurRepo UtilisateurRepo) {
 		this.UtilisateurRepo=UtilisateurRepo;
 	}
+	public Optional<utilisateur> getUtilisateurCourant() {
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        return UtilisateurRepo.findUtilisateurByUserName(currentUserName);
+    }
 	public  List<utilisateur> findAllUtilisateursT(){
 		
 		return UtilisateurRepo.findAllByActifTrue();
@@ -26,6 +35,13 @@ public class utilisateurService  {
 	 public utilisateur createUser(utilisateur utilisateur) {
 		  utilisateur.setActif(true);
 	        return UtilisateurRepo.save(utilisateur);
+	    }
+	 public Optional<role> getRoleUtilisateurCourant() {
+	        Optional<utilisateur> utilisateurOptional = getUtilisateurCourant();
+	        if (utilisateurOptional.isPresent()) {
+	            return Optional.ofNullable(utilisateurOptional.get().getRole());
+	        }
+	        return Optional.empty();
 	    }
 	    
 //	    public Optional<utilisateur> getUserByEmail(String mail) {
@@ -53,6 +69,17 @@ public class utilisateurService  {
 	    	
 	    	return UtilisateurRepo.save(utilisateur);
 	    }
+		public  List<utilisateur> getUtilsateurByRole(role role) {
+			return  UtilisateurRepo.findByRole(role);
+		}
+		public List<utilisateur> getUtilisateurByFonction(String fonction) {
+			return UtilisateurRepo.findByFonction(fonction);
+		}
+		public List<String> getFonctions() {
+			 return UtilisateurRepo.getFonctions();
+		}	 
+		
+
 
 	}
 

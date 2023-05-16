@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import ngcb.app.ngcb.model.comptB;
+import ngcb.app.ngcb.model.etat;
 import ngcb.app.ngcb.model.signataire;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.signataireRepo;
@@ -59,6 +60,18 @@ public class signataireResource {
 		return new ResponseEntity<>(updateSignataire, HttpStatus.OK);
 		
 	}
+
+
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/fonction/{fonction}")
+    public ResponseEntity<List<signataire>> getSignataireByFonction(@PathVariable("fonction") String fonction) {
+        List<signataire> signataire = SignataireService.getSignataireByFonction(fonction);
+        if (signataire.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(signataire);
+        }
+    }
 
 	@PreAuthorize("isAuthenticated()")
 	@PutMapping("/delete")

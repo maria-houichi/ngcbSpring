@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import ngcb.app.ngcb.model.comptB;
+import ngcb.app.ngcb.model.etat;
 import ngcb.app.ngcb.model.signataire;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.signataireRepo;
@@ -48,6 +50,11 @@ public  List<signataire> findAllsignatairesdeleted(){
 	 public List<String> getFonctions() {
 	        return SignataireRepo.getFonctions();
 	    }
+	 
+		public List<signataire> getSignataireByFonction(String fonction) {
+			
+			return SignataireRepo.findByFonction(fonction);
+		}
 
 
 }

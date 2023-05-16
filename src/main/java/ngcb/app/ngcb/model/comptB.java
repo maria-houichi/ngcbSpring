@@ -13,13 +13,11 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -67,7 +65,9 @@ public structure structure;
 @JoinColumn(name="codeAgence", nullable=false )
 @JsonIgnoreProperties("comptesB")
 private agence agence;
-       Long rib ;
+//@Column(length=20)
+private Long rib;
+      
        nature nature ;
 	   type type ;
 	   Date date_dem;

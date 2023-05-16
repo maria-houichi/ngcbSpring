@@ -42,8 +42,6 @@ public class structure implements Serializable {
     @OneToMany(mappedBy="structure")
     @JsonIgnoreProperties("structure")
     private Set<comptB> comptesB;
-    @Column(name = "CDG")
-	private String cdg;
     @Column (name = "CLEPARENT")
  	private int parentStr;   
     @Column(name = "LIBELLE")
@@ -80,14 +78,6 @@ public class structure implements Serializable {
 	}
 
 
-
-	public String getCdg() {
-		return cdg;
-	}
-
-	public void setCdg(String cdg) {
-		this.cdg = cdg;
-	}
 
 	public int getParentStr() {
 		return parentStr;
@@ -168,7 +158,7 @@ public class structure implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Structure [idStr=" + codeStr + ", cdg=" + cdg + ", parentStr=" + parentStr + ", libStr=" + libStr
+		return "Structure [idStr=" + codeStr +  ", parentStr=" + parentStr + ", libStr=" + libStr
 				+ ", type=" + type + "]";
 	}
 

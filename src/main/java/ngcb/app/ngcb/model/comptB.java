@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -51,7 +52,9 @@ public structure structure;
 @JoinColumn(name="codeAgence", nullable=false )
 @JsonIgnoreProperties("comptesB")
 private agence agence;
-       Long rib ;
+//@Column(length=20)
+private Long rib;
+      
        nature nature ;
 	   type type ;
 	   LocalDate date_dem;

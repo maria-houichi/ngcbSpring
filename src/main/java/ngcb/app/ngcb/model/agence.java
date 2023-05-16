@@ -8,6 +8,7 @@ import org.hibernate.annotations.Cache;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -20,6 +21,7 @@ public class agence implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 @Id
+//@Column(length=5)
 
 	   Long codeAgence;
 @OneToMany(mappedBy="agence")

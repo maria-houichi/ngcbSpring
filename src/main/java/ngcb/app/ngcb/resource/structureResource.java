@@ -56,7 +56,7 @@ public class structureResource {
 	}
 
 	public structure getStr(structure str) {
-		if(str.getParentStr()==25) {
+		if(str.getParentStr()==100) {
 			//System.out.println("if "+str.getParentStr());
 			return str;			
 		}else {

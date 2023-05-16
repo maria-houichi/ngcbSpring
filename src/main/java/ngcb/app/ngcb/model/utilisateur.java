@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -20,6 +21,7 @@ import lombok.Data;
 public class utilisateur  implements UserDetails{
 	private static final long serialVersionUID = 1L;
 	@Id
+	@Column(length=6)
 	private String matricule;
     private String nom;
     private String prenom;

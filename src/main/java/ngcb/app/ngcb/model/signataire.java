@@ -22,6 +22,13 @@ public class signataire  extends employe implements Serializable{
 	@JoinColumn(name="codeStr", nullable=false )
 	@JsonIgnoreProperties("signataires")
 	private structure structure;
+	
+public structure getStructure() {
+		return structure;
+	}
+	public void setStructure(structure structure) {
+		this.structure = structure;
+	}
 public signataire() {}
 	signataire (String matricule, String nom,String  prenom, String fonction,genre genre, Boolean actif ){
 		super(matricule, nom, prenom , fonction , genre);

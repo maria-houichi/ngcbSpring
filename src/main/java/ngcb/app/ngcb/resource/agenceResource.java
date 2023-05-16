@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,25 +29,26 @@ public class agenceResource {
 	public agenceResource(agenceService AgenceService) {
 		this.AgenceService = AgenceService;
 	}
-	
+	@PreAuthorize("isAuthenticated()")  
 	@GetMapping("/all")
 	public ResponseEntity<List<agence>> getAllAgences(){
 		List<agence> agences = AgenceService.findAllAgences();
 		return new ResponseEntity<>(agences, HttpStatus.OK);
 	}
-	
+	@PreAuthorize("isAuthenticated()")  
 	@PostMapping("/add")
 	public ResponseEntity<agence> addAgence(@RequestBody agence agence){
 		agence newAgence= AgenceService.addAgence(agence);
 		return new ResponseEntity<>(newAgence, HttpStatus.CREATED);
 		
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/find/{codeAgence}")
 	public ResponseEntity<agence> getAgenceBy(@PathVariable("codeAgence")Long codeAgence){
 		agence agence =AgenceService.findAgenceByCodeAgence(codeAgence);
 		return new ResponseEntity<>(agence,HttpStatus.OK );
 	}
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/find/by/{codeBanque}")
 	
 	public ResponseEntity<List<agence>> getAllAgencesByCodeBanque(@PathVariable("codeBanque")banque banque){

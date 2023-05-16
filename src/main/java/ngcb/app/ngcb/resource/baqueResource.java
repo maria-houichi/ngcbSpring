@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,20 +28,20 @@ public class baqueResource {
 	public baqueResource(banqueService BanqueService) {
 		this.BanqueService = BanqueService;
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/all")
 	public ResponseEntity<List<banque>> getAllBanques(){
 		List<banque> banques =BanqueService.findAllBanques();
 		return new ResponseEntity<>(banques, HttpStatus.OK);
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/add")
 	public ResponseEntity<banque> addBanque(@RequestBody banque banque){
 		banque newBanque= BanqueService.addBanque(banque);
 		return new ResponseEntity<>(newBanque, HttpStatus.CREATED);
 		
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/find/{codeBanque}")
 	public ResponseEntity<banque> getBanqueBy(@PathVariable("codeBanque")Long codeBanque){
 		banque banque =BanqueService.findBanqueByCodeBanque(codeBanque);

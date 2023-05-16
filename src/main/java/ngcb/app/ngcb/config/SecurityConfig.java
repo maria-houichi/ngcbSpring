@@ -26,11 +26,11 @@ import static org.springframework.http.HttpMethod.PUT;
 public class SecurityConfig {
 	 private final jwtFilter jwtFilter;
 	  private final AuthenticationProvider authenticationProvider;
-	  private final LogoutHandler logoutHandler;
-		public SecurityConfig(jwtFilter jwtFilter,AuthenticationProvider authenticationProvider,LogoutHandler logoutHandler) {
+	
+		public SecurityConfig(jwtFilter jwtFilter,AuthenticationProvider authenticationProvider) {
 			this.jwtFilter=jwtFilter;
 			this.authenticationProvider=authenticationProvider;
-			this.logoutHandler=logoutHandler;
+		
 			
 		}
 
@@ -39,7 +39,8 @@ public class SecurityConfig {
         http.csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers(
-                "/**"
+//                "/api/v1/auth/**"
+            		"/**"
             ).permitAll()
             .anyRequest().authenticated()
             .and()
@@ -47,11 +48,7 @@ public class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-        .logout()
-        .logoutUrl("/api/v1/auth/logout")
-        .addLogoutHandler(logoutHandler)
-        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

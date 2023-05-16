@@ -52,10 +52,16 @@ private List<delegation> delegations;
 @GeneratedValue
  	   Long id ;
 
+public List<delegation> getDelegations() {
+	return delegations;
+}
+public void setDelegations(List<delegation> delegations) {
+	this.delegations = delegations;
+}
 @ManyToOne
 @JoinColumn(name="codeStr", nullable=false )
 @JsonIgnoreProperties("comptesB")
-private structure structure;
+public structure structure;
 
 @ManyToOne
 @JoinColumn(name="codeAgence", nullable=false )

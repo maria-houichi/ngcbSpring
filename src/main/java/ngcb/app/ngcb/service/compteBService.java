@@ -1,6 +1,7 @@
 package ngcb.app.ngcb.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,16 @@ import ngcb.app.ngcb.employeNotFoundException;
 import ngcb.app.ngcb.model.comptB;
 import ngcb.app.ngcb.model.employe;
 import ngcb.app.ngcb.model.signataire;
+import ngcb.app.ngcb.model.structure;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.compteBRepo;
+import ngcb.app.ngcb.repo.structureRepo;
 
 @Service
 @Transactional
 public class compteBService {
 private final compteBRepo CompteBRepo;
+
 	
 	public compteBService(compteBRepo CompteBRepo) {
 		this.CompteBRepo=CompteBRepo;
@@ -34,10 +38,14 @@ private final compteBRepo CompteBRepo;
 		} 
 	  
 	  public comptB updateCompteB (comptB comptB) {
-			return CompteBRepo.save(comptB);} 
-	    
+			return CompteBRepo.save(comptB);}
 
-	
+	  public List<comptB> findeCompteBByStr(int codeStr) {
+		    return CompteBRepo.findByStructureCodeStr(codeStr);
+		}
 
 
-}
+	        public Long getIdCompte(comptB comptB ) {
+	        	   return comptB.getId();
+	        }
+	        }

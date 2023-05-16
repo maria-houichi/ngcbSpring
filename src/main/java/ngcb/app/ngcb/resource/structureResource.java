@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import ngcb.app.ngcb.model.comptB;
 import ngcb.app.ngcb.model.structure;
 import ngcb.app.ngcb.service.structureService;
 @RestController
@@ -26,25 +29,20 @@ public class structureResource {
 
 	@Autowired 
 	structureService structureService;
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/all")
 	public List<structure> findAllProd() {
-//		List<structure> str= structureService.findAllStr();
-//		for(structure s :str) {
-//			if(s.getParentStr()!=0) {
-//			s = getStr(s);
-//			}
-//		}
-//		return str;
 		return structureService.findAllStr();
 	}
 
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/children/{codeD}")
 	public List<String> findStrChildren(@PathVariable String codeD) {
 		codeD = "%"+codeD+"%";
 		return structureService.findStrChildren(codeD);
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/childrenStructures/{codeD}")
 	public List<structure> findChildrenStructures(@PathVariable String codeD) {
 		codeD = "%"+codeD+"%";
@@ -62,14 +60,13 @@ public class structureResource {
 			 return str;
 		}
 	}
-	
-	@GetMapping("/{idStr}")
-	public structure findById(@PathVariable int idStr) {
-		structure str= structureService.findById(idStr);
-		str=getStr(str);
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/{codeStr}")
+	public structure findById(@PathVariable int codeStr) {
+		structure str= structureService.findById(codeStr);
 		return str;
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/codeStr/{code}")
 	public structure findStrByCode(@PathVariable String code) {
 		structure str= structureService.findStrByCode(code);
@@ -77,7 +74,7 @@ public class structureResource {
 		return str;
 	}
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@PutMapping("/codesStr")
 	public List<structure> findStrByCodes(@RequestBody List<String> codes) {
 		return structureService.findStrByCodes(codes);
@@ -86,26 +83,3 @@ public class structureResource {
 }
 
 
-//@RestController
-//@RequestMapping("/structure")
-//public class structureResource {
-//	
-//	private final structureService StructureService;
-//	
-//	public structureResource(structureService StructureService) {
-//		this.StructureService = StructureService;
-//	}
-//	
-//	@GetMapping("/all")
-//	public ResponseEntity<List<structure>> getAllStructures(){
-//		List<structure> structures = StructureService.findAllStructures();
-//		return new ResponseEntity<>(structures, HttpStatus.OK);
-//	}
-//	
-//	@GetMapping("/find/{codeStr}")
-//	public ResponseEntity<structure> getStructureBy(@PathVariable("codeStr")Long codeStr){
-//		structure structure =StructureService.findStructureByCodeStr(codeStr);
-//		return new ResponseEntity<>(structure,HttpStatus.OK );
-//	}
-//
-//}

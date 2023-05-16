@@ -15,21 +15,21 @@ public class delegation implements Serializable{
 	 private static final long serialVersionUID = 1L;
 	   @EmbeddedId
 	   protected pk_deleg pkDeleg;
-	   @Column(name = "date_deleg")
-	   private Date date_deleg;
-	   @Column(name = "date_annul")
-	   private Date date_annul;
+	   @Column(name = "dateDeleg")
+	   private Date dateDeleg;
+	   @Column(name = "dateAnnul")
+	   private Date dateAnnul;
 	   @Column(name = "etat")
-	   private String etat;
-	   @Column(name = "est_valide")
-	   private Boolean est_valide;
+	   private etatDeleg etat;
+	   @Column(name = "estValide")
+	   private Boolean estValide;
 	   
 	   
-	   @JoinColumn(name = "compteB", insertable = false, updatable = false)
+	   @JoinColumn(name = "compteB" /*insertable = false, updatable = false*/)
 	   @ManyToOne
 	   @JsonBackReference
 	   private comptB comptB;
-	   @JoinColumn(name = "signataire", insertable = false, updatable = false)
+	   @JoinColumn(name = "signataire"/*, insertable = false, updatable = false*/)
 	   @ManyToOne
 	   private signataire signataire;
 	   
@@ -37,14 +37,14 @@ public class delegation implements Serializable{
 	   public delegation() {
 	   }
 
-	public delegation(pk_deleg pkDeleg, Date date_deleg, Date date_annul, String etat, Boolean est_valide,
+	public delegation(pk_deleg pkDeleg, Date dateDeleg, Date dateAnnul, etatDeleg etat, Boolean estValide,
 			signataire signataire, comptB comptB) {
 		
 		this.pkDeleg = pkDeleg;
-		this.date_deleg = date_deleg;
-		this.date_annul = date_annul;
+		this.dateDeleg = dateDeleg;
+		this.dateAnnul = dateAnnul;
 		this.etat = etat;
-		this.est_valide = est_valide;
+		this.estValide = estValide;
 		this.signataire = signataire;
 		this.comptB = comptB;
 	}
@@ -59,36 +59,36 @@ public class delegation implements Serializable{
 		this.pkDeleg = pkDeleg;
 	}
 
-	public Date getDate_deleg() {
-		return date_deleg;
+	public Date getdateDeleg() {
+		return dateDeleg;
 	}
 
-	public void setDate_deleg(Date date_deleg) {
-		this.date_deleg = date_deleg;
+	public void setdateDeleg(Date dateDeleg) {
+		this.dateDeleg = dateDeleg;
 	}
 
-	public Date getDate_annul() {
-		return date_annul;
+	public Date getdateAnnul() {
+		return dateAnnul;
 	}
 
-	public void setDate_annul(Date date_annul) {
-		this.date_annul = date_annul;
+	public void setdateAnnul(Date dateAnnul) {
+		this.dateAnnul = dateAnnul;
 	}
 
-	public String getEtat() {
+	public etatDeleg getEtat() {
 		return etat;
 	}
 
-	public void setEtat(String etat) {
+	public void setEtat(etatDeleg etat) {
 		this.etat = etat;
 	}
 
-	public Boolean getEst_valide() {
-		return est_valide;
+	public Boolean getestValide() {
+		return estValide;
 	}
 
-	public void setEst_valide(Boolean est_valide) {
-		this.est_valide = est_valide;
+	public void setestValide(Boolean estValide) {
+		this.estValide = estValide;
 	}
 
 	public signataire getSignataire() {
@@ -109,8 +109,8 @@ public class delegation implements Serializable{
 	   
 	@Override
 	public String toString() {
-		return "delegation [pkDeleg=" + pkDeleg + ", date_deleg=" + date_deleg + ", date_annul=" + date_annul
-				+ ", etat=" + etat + ", est_valide=" + est_valide + ", signataire=" + signataire + ", comptB=" + comptB
+		return "delegation [pkDeleg=" + pkDeleg + ", dateDeleg=" + dateDeleg + ", dateAnnul=" + dateAnnul
+				+ ", etat=" + etat + ", estValide=" + estValide + ", signataire=" + signataire + ", comptB=" + comptB
 				+ "]";
 	}
 	   

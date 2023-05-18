@@ -9,8 +9,11 @@ import jakarta.transaction.Transactional;
 import ngcb.app.ngcb.employeNotFoundException;
 import ngcb.app.ngcb.model.comptB;
 import ngcb.app.ngcb.model.employe;
+import ngcb.app.ngcb.model.etat;
+import ngcb.app.ngcb.model.nature;
 import ngcb.app.ngcb.model.signataire;
 import ngcb.app.ngcb.model.structure;
+import ngcb.app.ngcb.model.type;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.repo.compteBRepo;
 import ngcb.app.ngcb.repo.structureRepo;
@@ -28,6 +31,11 @@ private final compteBRepo CompteBRepo;
 	public  List<comptB> findAllCompteBs(){
 		return CompteBRepo.findAll();}
 	
+	
+	
+	/*public  List<comptB> findByParentStr(int ParentStr){
+		return CompteBRepo.findByParentStr(ParentStr);}*/
+	
 	public comptB addCompteB (comptB comptB) {
 		return CompteBRepo.save(comptB);} 
 	
@@ -43,6 +51,21 @@ private final compteBRepo CompteBRepo;
 	  public List<comptB> findeCompteBByStr(int codeStr) {
 		    return CompteBRepo.findByStructureCodeStr(codeStr);
 		}
+
+	public List<comptB> getComptesByType(type type) {
+	
+		return CompteBRepo.findByType(type);
+	}
+	public List<comptB> getComptesByEtat(etat etat) {
+		
+		return CompteBRepo.findByEtat(etat);
+	}
+	public List<comptB> getComptesByNature(nature nature) {
+		
+		return CompteBRepo.findByNature(nature);
+	}
+
+
 
 
 	        public Long getIdCompte(comptB comptB ) {

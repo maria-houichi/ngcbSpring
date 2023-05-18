@@ -7,8 +7,8 @@ import ngcb.app.ngcb.model.structure;
 
 public interface structureRepo extends JpaRepository<structure,Integer >  {
 
-public structure findStrByCodeStr(int codeStr);
-public List<structure> findAllStr();
+    public List<structure> findAllStr();
+    public structure findStrByCodeStr(int codeStr);
 
 	public List<String> findStrChildren(String codeD);
 	

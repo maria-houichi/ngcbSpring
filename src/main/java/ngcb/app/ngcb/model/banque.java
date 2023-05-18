@@ -15,7 +15,7 @@ public class banque implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	 @Id
-	// @Column(name = "CODEBanque", length = "3")
+	 @Column(name = "CODEBanque")
 	  Long codeBanque ;
  @OneToMany(mappedBy="banque")
 	  @JsonIgnoreProperties("banque")

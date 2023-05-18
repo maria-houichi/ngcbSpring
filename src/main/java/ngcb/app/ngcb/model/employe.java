@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -25,6 +26,7 @@ public class employe implements Serializable {
 	@Autowired
 	
 	@Id
+	//@Column(length=6)
 	private String matricule;
     private String nom;
     private String prenom;

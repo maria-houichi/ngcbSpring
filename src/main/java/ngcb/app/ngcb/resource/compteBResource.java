@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ngcb.app.ngcb.model.comptB;
+import ngcb.app.ngcb.model.etat;
+import ngcb.app.ngcb.model.nature;
 import ngcb.app.ngcb.model.structure;
+import ngcb.app.ngcb.model.type;
 import ngcb.app.ngcb.model.utilisateur;
 import ngcb.app.ngcb.service.compteBService;
 
@@ -58,10 +61,50 @@ public class compteBResource {
 	public ResponseEntity<List<comptB>> getCmptbyStr(@PathVariable("codeStr") int codeStr) {
 	    List<comptB> comptes = CompteBService.findeCompteBByStr(codeStr);
 	    return new ResponseEntity<>(comptes, HttpStatus.OK);
+	} 
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/type/{type}")
+    public ResponseEntity<List<comptB>> getComptesByType(@PathVariable("type") type type) {
+        List<comptB> comptes = CompteBService.getComptesByType(type);
+        if (comptes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(comptes);
+        }
+    }
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/etat/{etat}")
+    public ResponseEntity<List<comptB>> getComptesByEtat(@PathVariable("etat") etat etat) {
+        List<comptB> comptes = CompteBService.getComptesByEtat(etat);
+        if (comptes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(comptes);
+        }
+    }
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/nature/{nature}")
+    public ResponseEntity<List<comptB>> getComptesByNature(@PathVariable("nature") nature nature) {
+        List<comptB> comptes = CompteBService.getComptesByNature(nature);
+        if (comptes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(comptes);
+        }
+    }
+
+	/*@GetMapping("/comptebyParent/{ParentStr}")
+	public ResponseEntity<List<comptB>> getCmptbyParent(@PathVariable("ParentStr") int ParentStr) {
+	    List<comptB> comptes = CompteBService.findByParentStr(ParentStr);
+	    return new ResponseEntity<>(comptes, HttpStatus.OK);
 	}
+<<<<<<< HEAD
 
 
 	@PreAuthorize("isAuthenticated()")  
+=======
+	*/
+	@PreAuthorize("isAuthenticated()") 
 	@GetMapping("/get/{id}")
 	public ResponseEntity<comptB> getCmpt(@PathVariable ("id")Long id){
 		comptB ComptB=CompteBService.findeCompteBById(id);

@@ -38,7 +38,7 @@ public class compteBResource {
 	
 	@PreAuthorize("isAuthenticated()")  
 	@GetMapping("/all")
-	public ResponseEntity<List<comptB>> getAllEmployes(){
+	public ResponseEntity<List<comptB>> getAllComptes(){
 		List<comptB> comptBs =CompteBService.findAllCompteBs();
 		return new ResponseEntity<>(comptBs, HttpStatus.OK);
 	}
@@ -51,7 +51,7 @@ public class compteBResource {
 	}
 	@PreAuthorize("isAuthenticated()")  
 	@PutMapping("/update")
-	public ResponseEntity<comptB> updateUtilisateur(@RequestBody comptB comptB){
+	public ResponseEntity<comptB> updateCompte(@RequestBody comptB comptB){
 		comptB updateComptB= CompteBService.updateCompteB(comptB);
 		return new ResponseEntity<>(updateComptB, HttpStatus.OK);
 		
@@ -93,17 +93,7 @@ public class compteBResource {
         }
     }
 
-	/*@GetMapping("/comptebyParent/{ParentStr}")
-	public ResponseEntity<List<comptB>> getCmptbyParent(@PathVariable("ParentStr") int ParentStr) {
-	    List<comptB> comptes = CompteBService.findByParentStr(ParentStr);
-	    return new ResponseEntity<>(comptes, HttpStatus.OK);
-	}
-<<<<<<< HEAD
 
-
-	@PreAuthorize("isAuthenticated()")  
-=======
-	*/
 	@PreAuthorize("isAuthenticated()") 
 	@GetMapping("/get/{id}")
 	public ResponseEntity<comptB> getCmpt(@PathVariable ("id")Long id){

@@ -3,10 +3,13 @@ package ngcb.app.ngcb.model;
 import java.util.Collection;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,21 +37,27 @@ public class utilisateur  implements UserDetails{
 	    Boolean actif;
 //	    @OneToMany(mappedBy = "utilisateur")
 //	    private List<token> tokens;
+//	    @OneToMany(mappedBy="utilisateur")
+//		  @JsonIgnoreProperties("utilisateur")
+//		 private Set<ChatMessage> messages;  
 	    
 	    public utilisateur () {}
-	    public utilisateur ( String matricule  ,String  nom , String  prenom, String fonction  ,genre genre,String userName,String password, role role, Boolean actif )
-	    {
-	        this.matricule = matricule;
-	        this.nom=nom;
-	        this.prenom=prenom;
-	        this.fonction=fonction;
-	        this.genre = genre;
-	        this.userName=userName;
-	        this.password=password;
-	        this.role = role;
-	        this.actif = actif;
-	       // this.tokens = tokens;
-	    }
+/*Set<ChatMessage> messages)*/
+		public utilisateur(String matricule, String nom, String prenom, String fonction,
+				genre genre, String userName, String password, role role,
+				Boolean actif) {
+		
+			this.matricule = matricule;
+			this.nom = nom;
+			this.prenom = prenom;
+			this.fonction = fonction;
+			this.genre = genre;
+			this.userName = userName;
+			this.password = password;
+			this.role = role;
+			this.actif = actif;
+			//this.messages = messages;
+		}
 	    
 
 	    public  String getMatricule()  {
@@ -152,6 +161,12 @@ public class utilisateur  implements UserDetails{
 			// TODO Auto-generated method stub
 			return true;
 		}
+
+
+
+
+
+
 
 
 }
